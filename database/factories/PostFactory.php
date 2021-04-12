@@ -23,8 +23,9 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->sentence,
+            'titulo' => $this->faker->sentence,
             'body' => $this->faker->text
         ];
     }
 }
+{{ $posts->links() }}
