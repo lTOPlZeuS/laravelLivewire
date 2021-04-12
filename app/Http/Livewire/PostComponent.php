@@ -9,6 +9,9 @@ class PostComponent extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
+
+    public $titulo,$body;
+    public $view = 'create';
     public function render()
     {
         return view('livewire.post-component',[
@@ -19,4 +22,16 @@ class PostComponent extends Component
     public function destroy($id){
         Post::destroy($id);
     }
+
+    public function store(){
+        $this->validate([
+            'titulo' => 'required',
+            'body' => 'required'
+        ]);
+        Post::create([
+            'titulo' => $this->titulo,
+            'body' => $this->body
+        ]);
+    }
+
 }
