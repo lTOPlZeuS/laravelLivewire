@@ -33,5 +33,15 @@ class PostComponent extends Component
             'body' => $this->body
         ]);
     }
-
+    public function edit($id){
+        $post = Post::find($id);
+        $this->titulo= $post->titulo;
+        $this->body= $post->body;
+        $this->view = 'edit';
+    }
+    public function default(){
+        $this->titulo='';
+        $this->body='';
+        $this->view = 'create';
+    }
 }
