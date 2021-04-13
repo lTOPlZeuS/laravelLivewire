@@ -10,7 +10,7 @@ class PostComponent extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
-    public $titulo,$body;
+    public $post_id,$titulo,$body;
     public $view = 'create';
     public function render()
     {
@@ -35,6 +35,7 @@ class PostComponent extends Component
     }
     public function edit($id){
         $post = Post::find($id);
+        $this->post_id= $post->id;
         $this->titulo= $post->titulo;
         $this->body= $post->body;
         $this->view = 'edit';
@@ -43,5 +44,17 @@ class PostComponent extends Component
         $this->titulo='';
         $this->body='';
         $this->view = 'create';
+    }
+    public function update(){
+        $this->validate([
+            'titulo' => 'required',
+            'body' => 'required'
+        ]);
+        $post = Post::find($this->post_id);
+        $post->update([
+            'titulo' => $this->titulo,
+            'body' => $this->body
+        ]);
+        $this->default();
     }
 }
